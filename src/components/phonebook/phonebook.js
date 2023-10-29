@@ -17,6 +17,7 @@ export class Phonebook extends Component {
       const contactsAfterDelete = [
         ...prevState.contacts.filter(oldContact => oldContact !== contact),
       ];
+      localStorage.setItem('Contacts', JSON.stringify(contactsAfterDelete));
       if (contactsAfterDelete.length === 0) {
         return {
           contacts: contactsAfterDelete,
@@ -35,20 +36,20 @@ export class Phonebook extends Component {
   };
 
   componentDidMount() {
-    this.getDataFromLocalStorage();
-  }
-
-  getDataFromLocalStorage = () => {
     try {
       const contactsFromLocalStorage = localStorage.getItem('Contacts');
-      console.log(contactsFromLocalStorage);
-      return contactsFromLocalStorage === null
-        ? undefined
-        : JSON.parse(contactsFromLocalStorage);
+      if (contactsFromLocalStorage !== null) {
+        this.setState(() => {
+          return {
+            contacts: JSON.parse(contactsFromLocalStorage),
+            showContactList: true,
+          };
+        });
+      }
     } catch (error) {
       console.error('Get state error: ', error.message);
     }
-  };
+  }
 
   handleSubmit = event => {
     event.preventDefault();
