@@ -34,11 +34,32 @@ export class Phonebook extends Component {
     this.setState({ filter: event.target.value.toLowerCase() });
   };
 
+  componentDidMount() {
+    this.getDataFromLocalStorage();
+  }
+
+  getDataFromLocalStorage = () => {
+    try {
+      const contactsFromLocalStorage = localStorage.getItem('Contacts');
+      console.log(contactsFromLocalStorage);
+      return contactsFromLocalStorage === null
+        ? undefined
+        : JSON.parse(contactsFromLocalStorage);
+    } catch (error) {
+      console.error('Get state error: ', error.message);
+    }
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     const form = event.currentTarget;
     const name = form.elements.name.value;
     let phoneNumber = form.elements.number.value;
+
+    const newContact = {
+      name: name,
+      phoneNumber: phoneNumber,
+    };
 
     this.setState(prevState => {
       for (const element of prevState.contacts) {
@@ -47,12 +68,9 @@ export class Phonebook extends Component {
           return;
         }
       }
-      const newContact = {
-        name: name,
-        phoneNumber: phoneNumber,
-      };
-      console.log(newContact);
+
       const allContacts = [...prevState.contacts, newContact];
+      localStorage.setItem('Contacts', JSON.stringify(allContacts));
       return {
         contacts: allContacts,
         showContactList: true,
