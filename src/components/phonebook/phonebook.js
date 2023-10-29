@@ -42,12 +42,17 @@ export class Phonebook extends Component {
 
     this.setState(prevState => {
       for (const element of prevState.contacts) {
-        if (element.includes(name)) {
+        if (element.name === name) {
           alert(`${name} is already in contacts`);
           return;
         }
       }
-      const allContacts = [...prevState.contacts, `${name}: ${phoneNumber}`];
+      const newContact = {
+        name: name,
+        phoneNumber: phoneNumber,
+      };
+      console.log(newContact);
+      const allContacts = [...prevState.contacts, newContact];
       return {
         contacts: allContacts,
         showContactList: true,
@@ -58,7 +63,7 @@ export class Phonebook extends Component {
   render() {
     const { contacts, filter, showContactList } = this.state;
     const filteredContacts = contacts.filter(contact =>
-      contact.toLowerCase().includes(filter)
+      contact.name.toLowerCase().includes(filter)
     );
     return (
       <>

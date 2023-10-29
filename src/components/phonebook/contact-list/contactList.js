@@ -6,7 +6,7 @@ export const ContactList = ({ allContacts, onDelete, id }) => {
     const id = nanoid();
     return (
       <li key={id}>
-        {contact}
+        {contact.name}: {contact.phoneNumber}
         <button
           className="button-delete"
           type="button"
