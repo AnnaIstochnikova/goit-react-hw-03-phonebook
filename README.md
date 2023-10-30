@@ -14,11 +14,11 @@ To run this project locally, follow these steps:
 
 1. Clone the repository to your local machine using Git:
 
-git clone https://github.com/annaistochnikova/goit-react-hw-02-phonebook.git
+git clone https://github.com/annaistochnikova/goit-react-hw-03-phonebook.git
 
 2. Navigate to the project directory:
 
-cd goit-react-hw-02-phonebook
+cd goit-react-hw-03-phonebook
 
 3. Install the project dependencies using npm:
 
