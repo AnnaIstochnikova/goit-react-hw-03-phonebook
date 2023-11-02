@@ -38,11 +38,8 @@ export class Phonebook extends Component {
   componentDidMount() {
     try {
       const contactsFromLocalStorage = localStorage.getItem('Contacts');
-      // console.log(contactsFromLocalStorage[1]);
-      // console.log(contactsFromLocalStorage);
       if (contactsFromLocalStorage.length === 2) {
         this.setState({ showContactList: false });
-        console.log('empty');
       } else {
         this.setState(() => {
           return {
@@ -51,9 +48,6 @@ export class Phonebook extends Component {
           };
         });
       }
-      // else {
-      //   this.setState({ showContactList: false });
-      // }
     } catch (error) {
       console.error('Get state error: ', error.message);
     }
